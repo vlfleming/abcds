@@ -1,3 +1,19 @@
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param directory PARAM_DESCRIPTION
+#' @param person PARAM_DESCRIPTION, Default: c("participants", "controls")
+#' @param include_demographics PARAM_DESCRIPTION, Default: FALSE
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname read_cognitive
+#' @export 
+
 read_cognitive <- function(directory,
                            person = c("participants", "controls"),
                            include_demographics = FALSE){
@@ -12,7 +28,7 @@ read_cognitive <- function(directory,
     participants <- data.frame()
     for(i in cog_labels[!grepl("Montreal", cog_labels)]){
       file <- list.files(directory, pattern = i, full.names = TRUE)
-      temp_df <- read.csv(file)
+      if(length(file) != 0) temp_df <- read.csv(file)
       if("update_stamp" %in% colnames(temp_df)) temp_df$update_stamp <- NULL
       if(all(dim(participants) == 0)){
         participants <- temp_df

@@ -1,6 +1,22 @@
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param directory PARAM_DESCRIPTION
+#' @param include_demographics PARAM_DESCRIPTION, Default: FALSE
+#' @param ... PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname read_neuro_exam
+#' @export
+
 read_neuro_exam <- function(directory, include_demographics = FALSE, ...){
   
-  variables <- list(...)
+  variables <- check_variables(...)
   
   files <- list.files(directory, pattern = "Physical_and_Neurological", full.names = TRUE)
   

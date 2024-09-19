@@ -1,3 +1,20 @@
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param directory PARAM_DESCRIPTION
+#' @param person PARAM_DESCRIPTION, Default: c("participants", "controls")
+#' @param event_sequence PARAM_DESCRIPTION, Default: NULL
+#' @param simplify PARAM_DESCRIPTION, Default: FALSE
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname read_demographics
+#' @export 
+
 read_demographics <- function(directory,
                               person = c("participants", "controls"),
                               event_sequence = NULL,

@@ -1,3 +1,20 @@
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param directory PARAM_DESCRIPTION
+#' @param data PARAM_DESCRIPTION, Default: NULL
+#' @param person PARAM_DESCRIPTION, Default: c("participants", "controls")
+#' @param visit PARAM_DESCRIPTION, Default: c("clinical", "amy", "tau", "fdg", "mri", "csf")
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname add_latency
+#' @export 
+
 add_latency <- function(directory, data = NULL,
                         person = c("participants", "controls"),
                         visit = c("clinical", "amy", "tau", "fdg", "mri", "csf")){

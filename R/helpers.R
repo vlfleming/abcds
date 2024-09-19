@@ -46,6 +46,30 @@
   data[rowSums(is.na(data) | data == "") < ncol(data), colSums(is.na(data) | data == "") < nrow(data)]
 }
 
+check_variables <- function(...){
+  
+  variables <- list(...)
+  
+  load(system.file("extdata/data_dictionary.RData", package = "abcds"))
+  
+  unlist(variables[variables %in% data_dictionary$field_name])
 
+}
+
+
+
+.print_description <- function(){
+  message(
+  "  ADDS: Alzheimer's Disease Down Syndrome
+  - New York, NY (Columbia University/New York State Institute for Basic Research in Developmental Disabilities); 
+  - Boston, MA (Massachusetts General Hospital, Harvard University); 
+  - Irvine, CA (the University of California, Irvine)\n
+  NiAD: Neurodegeneration in Aging Down Syndrome
+  - Pittsburgh, PA (University of Pittsburgh); 
+  - Madison, WI (University of Wisconsin); 
+  - St. Louis, MO (Washington University); 
+  - Cambridge, England (University of Cambridge)"
+  )
+}
 
 
