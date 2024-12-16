@@ -31,9 +31,9 @@ read_demographics <- function(directory,
   simplified_demographics <- c("age_at_visit", "de_gender", "de_race", "de_ethnicity")
 
   if("participants" %in% person & "participant" %in% person_types){
-    participants <- read.csv(demographic_files[!grepl("Controls", demographic_files)])
+    participants <- utils::read.csv(demographic_files[!grepl("Controls", demographic_files)])
     if("update_stamp" %in% colnames(participants)) participants$update_stamp <- NULL
-    participants_age <- read.csv(age_and_latency_files[!grepl("Controls", age_and_latency_files)])
+    participants_age <- utils::read.csv(age_and_latency_files[!grepl("Controls", age_and_latency_files)])
     participants <- merge(
       participants,
       participants_age[, c("subject_label", "event_sequence", "age_at_visit")],
@@ -47,9 +47,9 @@ read_demographics <- function(directory,
   }
 
   if("controls" %in% person & "control" %in% person_types){
-    controls <- read.csv(demographic_files[grepl("Controls", demographic_files)])
+    controls <- utils::read.csv(demographic_files[grepl("Controls", demographic_files)])
     if("update_stamp" %in% colnames(controls)) controls$update_stamp <- NULL
-    controls_age <- read.csv(age_and_latency_files[grepl("Controls", age_and_latency_files)])
+    controls_age <- utils::read.csv(age_and_latency_files[grepl("Controls", age_and_latency_files)])
     controls <- merge(
       controls,
       controls_age[, c("subject_label", "event_sequence", "age_at_visit")],

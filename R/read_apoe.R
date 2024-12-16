@@ -23,7 +23,7 @@ read_apoe <- function(directory, person = c("participants", "controls"), include
   person_types <- unname(sapply(files, .detect_person))
 
   if("participants" %in% person & "participant" %in% person_types){
-    participants <- read.csv(files[!grepl("Controls", files)])
+    participants <- utils::read.csv(files[!grepl("Controls", files)])
     if("update_stamp" %in% colnames(participants)) participants$update_stamp <- NULL
     if(include_demographics){
       participants <- merge(
@@ -37,7 +37,7 @@ read_apoe <- function(directory, person = c("participants", "controls"), include
   }
 
   if("controls" %in% person & "control" %in% person_types){
-    controls <- read.csv(files[grepl("Controls", files)])
+    controls <- utils::read.csv(files[grepl("Controls", files)])
     if("update_stamp" %in% colnames(controls)) controls$update_stamp <- NULL
     if(include_demographics){
       controls <- merge(

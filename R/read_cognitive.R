@@ -22,13 +22,13 @@ read_cognitive <- function(directory,
 
   load(system.file("extdata/data_dictionary.RData", package = "abcds"))
 
-  cog_labels <- gsub("–| |:|/", "_", unique(data_dictionary[startsWith(data_dictionary$dd_crf_name, "cog"), "dd_crf_label"]))
+  cog_labels <- gsub("-| |:|/", "_", unique(data_dictionary[startsWith(data_dictionary$dd_crf_name, "cog"), "dd_crf_label"]))
 
   if("participants" %in% person){
     participants <- data.frame()
     for(i in cog_labels[!grepl("Montreal", cog_labels)]){
       file <- list.files(directory, pattern = i, full.names = TRUE)
-      if(length(file) != 0) temp_df <- read.csv(file)
+      if(length(file) != 0) temp_df <- utils::read.csv(file)
       if("update_stamp" %in% colnames(temp_df)) temp_df$update_stamp <- NULL
       if(all(dim(participants) == 0)){
         participants <- temp_df
@@ -54,7 +54,7 @@ read_cognitive <- function(directory,
 
 
   if("controls" %in% person){
-    controls <- read.csv(
+    controls <- utils::read.csv(
       list.files(
         directory,
         pattern = cog_labels[grepl("Montreal", cog_labels)],

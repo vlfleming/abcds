@@ -1,4 +1,5 @@
-
+#' @importFrom utils write.csv
+#' @importFrom dplyr arrange left_join
 
 merge_data <- function(directory){
 
@@ -12,14 +13,14 @@ merge_data <- function(directory){
   files2merge <- p[!grepl("Demographics|biospecimen|Metabolomics|ApoE|MRI", p)]
 
   demo <- p[grepl("Demographics", p)] |>
-    read.csv() |>
+    utils::read.csv() |>
     dplyr::arrange(subject_label, event_sequence)
 
   data <- demo
 
   for(i in files2merge){
     print(basename(i))
-    temp <- read.csv(i)
+    temp <- utils::read.csv(i)
     temp$update_stamp <- NULL
     if(grepl("MRI", basename(i))){ # MRI seems to have duplicated IDs
       temp <- temp[!duplicated(temp), ]
@@ -31,7 +32,7 @@ merge_data <- function(directory){
     }
   }
 
-  write.csv(data, file = file.path(directory, "merged_data.csv"), row.names = FALSE)
+  utils::write.csv(data, file = file.path(directory, "merged_data.csv"), row.names = FALSE)
 
 }
 

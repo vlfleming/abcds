@@ -13,6 +13,7 @@
 #'  }
 #' }
 #' @rdname add_latency
+#' @importFrom utils read.csv
 #' @export 
 
 add_latency <- function(directory, data = NULL,
@@ -28,7 +29,7 @@ add_latency <- function(directory, data = NULL,
   person_types <- unname(sapply(files, .detect_person))
 
   if("participants" %in% person & "participant" %in% person_types){
-    participants <- read.csv(files[!grepl("Controls", files)])
+    participants <- utils::read.csv(files[!grepl("Controls", files)])
     if("update_stamp" %in% colnames(participants)) participants$update_stamp <- NULL
     participants <- participants[, c("subject_label", "event_sequence", paste0(visit, "_latency_in_days"))]
     if(!is.null(data)){
@@ -44,7 +45,7 @@ add_latency <- function(directory, data = NULL,
   }
 
   if("controls" %in% person & "control" %in% person_types){
-    controls <- read.csv(files[grepl("Controls", files)])
+    controls <- utils::read.csv(files[grepl("Controls", files)])
     if("update_stamp" %in% colnames(controls)) controls$update_stamp <- NULL
     controls <- controls[, c("subject_label", "event_sequence", paste0(visit, "_latency_in_days"))]
     if(!is.null(data)){

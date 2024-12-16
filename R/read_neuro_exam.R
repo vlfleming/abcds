@@ -25,7 +25,7 @@ read_neuro_exam <- function(directory, include_demographics = FALSE, ...){
   person_types <- unname(sapply(files, .detect_person))
   
   if("participants" %in% person & "participant" %in% person_types){
-    participants <- read.csv(files[!grepl("Controls", files)])
+    participants <- utils::read.csv(files[!grepl("Controls", files)])
     if("update_stamp" %in% colnames(participants)) participants$update_stamp <- NULL
     if(include_demographics){
       participants <- merge(
