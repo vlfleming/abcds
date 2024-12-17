@@ -4,14 +4,22 @@
 \alias{calculate_kbit2_score}
 \title{calculate_kbit2_score}
 \usage{
-calculate_kbit2_score(age, verbal_score, nonverbal_score, print_kbit = TRUE)
+calculate_kbit2_score(
+  age_at_visit,
+  kbit2verbkraw,
+  kbit2ridraw,
+  kbit2vnonvraw,
+  print_kbit = TRUE
+)
 }
 \arguments{
-\item{age}{Participant's age}
+\item{age_at_visit}{Age of the participant at visit}
 
-\item{verbal_score}{Raw verbal score}
+\item{kbit2verbkraw}{Verbal Knowledge Raw Score}
 
-\item{nonverbal_score}{Raw nonverbal score}
+\item{kbit2ridraw}{Riddles Raw Score}
+
+\item{kbit2vnonvraw}{Nonverbal Raw Score}
 
 \item{print_kbit}{Print the KBIT-2 results to the console, Default: TRUE}
 }

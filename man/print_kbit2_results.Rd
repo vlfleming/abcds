@@ -4,10 +4,10 @@
 \alias{print_kbit2_results}
 \title{print_kbit2_results}
 \usage{
-print_kbit2_results(res)
+print_kbit2_results(kbitres)
 }
 \arguments{
-\item{res}{Results from the \code{calculate_kbit2_score} function}
+\item{kbitres}{Results from the \code{calculate_kbit2_score} function}
 }
 \description{
 Prints out the KBIT-2 results from the \code{calculate_kbit2_score} function.
