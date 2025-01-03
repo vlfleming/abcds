@@ -24,3 +24,4 @@ Expands the look-up table in cases where there are ranges in the scores
 \code{\link[data.table]{:=}}
 \code{\link[tibble]{tibble}}
 }
+\keyword{internal}

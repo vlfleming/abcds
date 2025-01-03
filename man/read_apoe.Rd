@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_apoe.R
 \name{read_apoe}
 \alias{read_apoe}
-\title{FUNCTION_TITLE}
+\title{read_apoe}
 \usage{
 read_apoe(
   directory,
@@ -11,25 +11,25 @@ read_apoe(
 )
 }
 \arguments{
-\item{directory}{PARAM_DESCRIPTION}
+\item{directory}{A path name containing the downloaded ABC-DS data from the
+University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+and Data Archive}
 
-\item{person}{PARAM_DESCRIPTION, Default: c("participants", "controls")}
+\item{person}{The specific group for which to read in the data, Default: c("participants", "controls")}
 
-\item{include_demographics}{PARAM_DESCRIPTION, Default: FALSE}
+\item{include_demographics}{An optional parameter to merge demographic information
+before returning the data, Default: FALSE}
 }
 \value{
-OUTPUT_DESCRIPTION
+A data frame of the APOE results of the participants or controls or
+a list containing the APOE results of the participants and controls.
 }
 \description{
-FUNCTION_DESCRIPTION
+Reads the file containing the APOE results from the directory
+for the participants and controls.
 }
 \details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Reads the file containing the APOE results from the directory
+for the participants and controls. End users also have an option to
+include the demographics with the \code{include_demographics} argument.
 }

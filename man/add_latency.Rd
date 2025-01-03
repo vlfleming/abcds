@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_latency.R
 \name{add_latency}
 \alias{add_latency}
-\title{FUNCTION_TITLE}
+\title{add_latency}
 \usage{
 add_latency(
   directory,
@@ -12,27 +12,31 @@ add_latency(
 )
 }
 \arguments{
-\item{directory}{PARAM_DESCRIPTION}
+\item{directory}{A path name containing the downloaded ABC-DS data from the
+University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+and Data Archive}
 
-\item{data}{PARAM_DESCRIPTION, Default: NULL}
+\item{data}{An optional data set existing in the user's global environment for
+which to add the latency variable(s), Default: NULL}
 
-\item{person}{PARAM_DESCRIPTION, Default: c("participants", "controls")}
+\item{person}{The specific group for which to read in the data, Default: c("participants", "controls")}
 
-\item{visit}{PARAM_DESCRIPTION, Default: c("clinical", "amy", "tau", "fdg", "mri", "csf")}
+\item{visit}{The latency variable to read in or add to the existing data set. Options can include any or
+all of the following: \code{clinical} for the clinic visit, \code{amy} for the amyloid PET scan, \code{tau} for the
+tau PET scan, \code{fdg} for the fdg PET scan, \code{mri} for the structural MRI, and \code{csf} for the cerebral
+spinal fluid draw, Default: c("clinical", "amy", "tau", "fdg", "mri", "csf")}
 }
 \value{
-OUTPUT_DESCRIPTION
+A data frame of the demographics of the participants or controls or
+a list containing the demographics of the participants and controls.
 }
 \description{
-FUNCTION_DESCRIPTION
+Reads the file containing the latency variables from the directory
+for the participants and controls and optionally adds the latency variable
+to a data set.
 }
 \details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Reads the file containing the latency variables from the directory
+for the participants and controls and optionally adds the latency variable
+to a data set.
 }

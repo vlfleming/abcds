@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_health_history.R
 \name{read_health_history}
 \alias{read_health_history}
-\title{FUNCTION_TITLE}
+\title{read_health_history}
 \usage{
 read_health_history(
   directory,
@@ -11,25 +11,25 @@ read_health_history(
 )
 }
 \arguments{
-\item{directory}{PARAM_DESCRIPTION}
+\item{directory}{A path name containing the downloaded ABC-DS data from the
+University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+and Data Archive}
 
-\item{person}{PARAM_DESCRIPTION, Default: c("participants", "controls")}
+\item{person}{The specific group for which to read in the data, Default: c("participants", "controls")}
 
-\item{include_demographics}{PARAM_DESCRIPTION, Default: FALSE}
+\item{include_demographics}{An optional parameter to merge demographic information
+before returning the data, Default: FALSE}
 }
 \value{
-OUTPUT_DESCRIPTION
+A data frame of the health history of the participants or controls or
+a list containing the health history of the participants and controls.
 }
 \description{
-FUNCTION_DESCRIPTION
+Reads the file containing the study participant's health history
+from the directory for the participants and controls.
 }
 \details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Reads the file containing the study participant's health history
+from the directory for the participants and controls. End users also have
+an option to include the demographics with the \code{include_demographics} argument.
 }

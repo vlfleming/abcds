@@ -2,10 +2,21 @@
 % Please edit documentation in R/abcds-package.R
 \docType{package}
 \name{abcds-package}
-\alias{abcds}
 \alias{abcds-package}
-\title{abcds: What the Package Does (Title Case)}
+\title{abcds: Eases the Reporting and Analysis of ABC-DS Data}
 \description{
-More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.
+Eases the reporting and analysis of data from the Alzheimer's Biomarker Consortium - Down Syndrome (ABC-DS) Study.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/bhelsel/abcds}
+  \item Report bugs at \url{https://github.com/bhelsel/abcds/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Brian C. Helsel \email{bhelsel@kumc.edu}
+
 }
 \keyword{internal}

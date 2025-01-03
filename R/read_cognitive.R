@@ -1,18 +1,21 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param directory PARAM_DESCRIPTION
-#' @param person PARAM_DESCRIPTION, Default: c("participants", "controls")
-#' @param include_demographics PARAM_DESCRIPTION, Default: FALSE
+#' @title read_cognitive
+#' @description Reads the files containing the cognitive function results from the directory
+#'   for the participants and controls. The cognitive function assessments are identified as those
+#'   starting with `cog` using the `dd_crf_name` variable in the data dictionary.
+#' @param directory A path name containing the downloaded ABC-DS data from the
+#'   University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+#'   and Data Archive
+#' @param person The specific group for which to read in the data, Default: c("participants", "controls")
+#' @param include_demographics An optional parameter to merge demographic information
+#'   before returning the data, Default: FALSE
 #' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @details Reads the files containing the cognitive function results from the
+#'   directory for the participants and controls. The cognitive function
+#'   assessments are identified as those starting with `cog` using the
+#'   `dd_crf_name` variable in the data dictionary. End users also have an
+#'   option to include the demographics with the `include_demographics` argument.
 #' @rdname read_cognitive
-#' @export 
+#' @export
 
 read_cognitive <- function(directory,
                            person = c("participants", "controls"),

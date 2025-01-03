@@ -1,19 +1,23 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param directory PARAM_DESCRIPTION
-#' @param person PARAM_DESCRIPTION, Default: c("participants", "controls")
-#' @param event_sequence PARAM_DESCRIPTION, Default: NULL
-#' @param simplify PARAM_DESCRIPTION, Default: FALSE
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title read_demographics
+#' @description Reads the file containing the demographics from the directory
+#'   for the participants and controls.
+#' @param directory A path name containing the downloaded ABC-DS data from the
+#'   University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+#'   and Data Archive
+#' @param person The specific group for which to read in the data, Default: c("participants", "controls")
+#' @param event_sequence Harmonized event sequence referring to the data collection time point, Default: NULL
+#' @param simplify Reduce the demographic variables to only include age,
+#'   gender, race, and ethnicity, Default: FALSE
+#' @return A data frame of the demographics of the participants or controls or
+#'   a list containing the demographics of the participants and controls.
+#' @details Reads the file containing the demographics from the directory
+#'   for the participants and controls. End users also have an option to simplify
+#'   the demographics included using the `simplify` argument or return the
+#'   demographics at a specific time point using `event_sequence`. Currently, the
+#'   `simplify` argument returns the `age_at_visit`, `de_gender`, `de_race`, and
+#'   `de_ethnicity` variables.
 #' @rdname read_demographics
-#' @export 
+#' @export
 
 read_demographics <- function(directory,
                               person = c("participants", "controls"),

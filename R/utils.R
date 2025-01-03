@@ -8,9 +8,9 @@
 #'  \code{\link[data.table]{:=}}
 #'  \code{\link[tibble]{tibble}}
 #' @rdname expand_lookup
-#' @export
 #' @importFrom data.table `:=`
 #' @importFrom tibble tibble
+#' @keywords internal
 
 
 expand_lookup <- function(data, variable){

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_cognitive.R
 \name{read_cognitive}
 \alias{read_cognitive}
-\title{FUNCTION_TITLE}
+\title{read_cognitive}
 \usage{
 read_cognitive(
   directory,
@@ -11,25 +11,27 @@ read_cognitive(
 )
 }
 \arguments{
-\item{directory}{PARAM_DESCRIPTION}
+\item{directory}{A path name containing the downloaded ABC-DS data from the
+University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+and Data Archive}
 
-\item{person}{PARAM_DESCRIPTION, Default: c("participants", "controls")}
+\item{person}{The specific group for which to read in the data, Default: c("participants", "controls")}
 
-\item{include_demographics}{PARAM_DESCRIPTION, Default: FALSE}
+\item{include_demographics}{An optional parameter to merge demographic information
+before returning the data, Default: FALSE}
 }
 \value{
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
+Reads the files containing the cognitive function results from the directory
+for the participants and controls. The cognitive function assessments are identified as those
+starting with \code{cog} using the \code{dd_crf_name} variable in the data dictionary.
 }
 \details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Reads the files containing the cognitive function results from the
+directory for the participants and controls. The cognitive function
+assessments are identified as those starting with \code{cog} using the
+\code{dd_crf_name} variable in the data dictionary. End users also have an
+option to include the demographics with the \code{include_demographics} argument.
 }

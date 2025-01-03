@@ -1,20 +1,25 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param directory PARAM_DESCRIPTION
-#' @param data PARAM_DESCRIPTION, Default: NULL
-#' @param person PARAM_DESCRIPTION, Default: c("participants", "controls")
-#' @param visit PARAM_DESCRIPTION, Default: c("clinical", "amy", "tau", "fdg", "mri", "csf")
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title add_latency
+#' @description Reads the file containing the latency variables from the directory
+#'   for the participants and controls and optionally adds the latency variable
+#'   to a data set.
+#' @param directory A path name containing the downloaded ABC-DS data from the
+#'   University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+#'   and Data Archive
+#' @param data An optional data set existing in the user's global environment for
+#'   which to add the latency variable(s), Default: NULL
+#' @param person The specific group for which to read in the data, Default: c("participants", "controls")
+#' @param visit The latency variable to read in or add to the existing data set. Options can include any or
+#'   all of the following: `clinical` for the clinic visit, `amy` for the amyloid PET scan, `tau` for the
+#'   tau PET scan, `fdg` for the fdg PET scan, `mri` for the structural MRI, and `csf` for the cerebral
+#'   spinal fluid draw, Default: c("clinical", "amy", "tau", "fdg", "mri", "csf")
+#' @return A data frame of the demographics of the participants or controls or
+#'   a list containing the demographics of the participants and controls.
+#' @details Reads the file containing the latency variables from the directory
+#'   for the participants and controls and optionally adds the latency variable
+#'   to a data set.
 #' @rdname add_latency
 #' @importFrom utils read.csv
-#' @export 
+#' @export
 
 add_latency <- function(directory, data = NULL,
                         person = c("participants", "controls"),

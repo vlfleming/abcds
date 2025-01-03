@@ -1,29 +1,30 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param directory PARAM_DESCRIPTION
-#' @param person PARAM_DESCRIPTION, Default: c("participants", "controls")
-#' @param include_demographics PARAM_DESCRIPTION, Default: FALSE
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' @title read_health_history
+#' @description Reads the file containing the study participant's health history
+#'   from the directory for the participants and controls.
+#' @param directory A path name containing the downloaded ABC-DS data from the
+#'   University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+#'   and Data Archive
+#' @param person The specific group for which to read in the data, Default: c("participants", "controls")
+#' @param include_demographics An optional parameter to merge demographic information
+#'   before returning the data, Default: FALSE
+#' @return A data frame of the health history of the participants or controls or
+#'   a list containing the health history of the participants and controls.
+#' @details Reads the file containing the study participant's health history
+#'   from the directory for the participants and controls. End users also have
+#'   an option to include the demographics with the `include_demographics` argument.
 #' @rdname read_health_history
-#' @export 
+#' @export
 
 read_health_history <- function(directory, person = c("participants", "controls"), include_demographics = FALSE){
-  
+
   if(length(person) == 1) person <- match.arg(person)
-  
+
   files <- list.files(directory, pattern = "Health_History", full.names = TRUE)
-  
+
   files <- files[!grepl("Followup|Medications", files)]
-  
+
   person_types <- unname(sapply(files, .detect_person))
-  
+
   if("participants" %in% person & "participant" %in% person_types){
     participants <- utils::read.csv(files[!grepl("Controls", files)])
     if("update_stamp" %in% colnames(participants)) participants$update_stamp <- NULL
@@ -37,7 +38,7 @@ read_health_history <- function(directory, person = c("participants", "controls"
     }
     class(participants) <- c("tbl_df", "tbl", "data.frame")
   }
-  
+
   if("controls" %in% person & "control" %in% person_types){
     controls <- utils::read.csv(files[grepl("Controls", files)])
     if("update_stamp" %in% colnames(controls)) controls$update_stamp <- NULL
@@ -51,7 +52,7 @@ read_health_history <- function(directory, person = c("participants", "controls"
     }
     class(controls) <- c("tbl_df", "tbl", "data.frame")
   }
-  
+
   if(exists("participants", inherits = FALSE) & exists("controls", inherits = FALSE)){
     return(list(participants = participants, controls = controls))
   } else if(exists("participants", inherits = FALSE)){

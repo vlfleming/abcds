@@ -2,30 +2,35 @@
 % Please edit documentation in R/read_neuro_exam.R
 \name{read_neuro_exam}
 \alias{read_neuro_exam}
-\title{FUNCTION_TITLE}
+\title{read_neuro_exam}
 \usage{
 read_neuro_exam(directory, include_demographics = FALSE, ...)
 }
 \arguments{
-\item{directory}{PARAM_DESCRIPTION}
+\item{directory}{A path name containing the downloaded ABC-DS data from the
+University of South Carolina Laboratory of Neuro Imaging's (LONI) Image
+and Data Archive}
 
-\item{include_demographics}{PARAM_DESCRIPTION, Default: FALSE}
+\item{include_demographics}{An optional parameter to merge demographic information
+before returning the data, Default: FALSE}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{An optional list of variables in the Physical and Neurological Exam file
+to include if the end user does not want to return all variables. Commonly used
+variables include \code{wt} (weight), \code{ht} (height), \code{bpsys} (systolic blood pressure), \
+\code{bpdia} (diastolic blood pressure), \code{hdcirc} (head circumference),
+\code{nkcirc} (neck circumference), and \code{gait} (gait abnormalities).}
 }
 \value{
-OUTPUT_DESCRIPTION
+A data frame of the physical and neurological exam of the participants or
+controls or a list containing the physical and neurological exam of the
+participants and controls.
 }
 \description{
-FUNCTION_DESCRIPTION
+Reads the file containing the physical and neurological exam
+from the directory for the participants and controls.
 }
 \details{
-DETAILS
-}
-\examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+Reads the file containing the physical and neurological exam from
+the directory for the participants and controls. End users also have an option
+to include the demographics with the \code{include_demographics} argument.
 }
