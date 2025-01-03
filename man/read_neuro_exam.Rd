@@ -4,7 +4,7 @@
 \alias{read_neuro_exam}
 \title{read_neuro_exam}
 \usage{
-read_neuro_exam(directory, include_demographics = FALSE, ...)
+read_neuro_exam(directory, include_demographics = FALSE, simplify = FALSE, ...)
 }
 \arguments{
 \item{directory}{A path name containing the downloaded ABC-DS data from the
@@ -13,6 +13,9 @@ and Data Archive}
 
 \item{include_demographics}{An optional parameter to merge demographic information
 before returning the data, Default: FALSE}
+
+\item{simplify}{Reduce the demographic variables to only include age,
+gender, race, and ethnicity, Default: FALSE}
 
 \item{...}{An optional list of variables in the Physical and Neurological Exam file
 to include if the end user does not want to return all variables. Commonly used

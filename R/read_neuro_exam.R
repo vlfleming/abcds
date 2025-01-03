@@ -6,6 +6,8 @@
 #'   and Data Archive
 #' @param include_demographics An optional parameter to merge demographic information
 #'   before returning the data, Default: FALSE
+#' @param simplify Reduce the demographic variables to only include age,
+#'   gender, race, and ethnicity, Default: FALSE
 #' @param ... An optional list of variables in the Physical and Neurological Exam file
 #'   to include if the end user does not want to return all variables. Commonly used
 #'   variables include `wt` (weight), `ht` (height), `bpsys` (systolic blood pressure), \
@@ -20,9 +22,23 @@
 #' @rdname read_neuro_exam
 #' @export
 
-read_neuro_exam <- function(directory, include_demographics = FALSE, ...){
+read_neuro_exam <- function(directory, include_demographics = FALSE, simplify = FALSE, ...){
 
-  variables <- check_variables(...)
+  variables <- list(...)
+
+  if(is.character(include_demographics)){
+    variables <- append(include_demographics, variables)
+    include_demographics <- FALSE
+  }
+
+  if(is.character(simplify)){
+    variables <- append(simplify, variables)
+    simplify <- FALSE
+  }
+
+  if(simplify & !include_demographics) include_demographics <- TRUE
+
+  variables <- check_variables(variables)
 
   files <- list.files(directory, pattern = "Physical_and_Neurological", full.names = TRUE)
 
@@ -34,17 +50,28 @@ read_neuro_exam <- function(directory, include_demographics = FALSE, ...){
     participants <- utils::read.csv(files[!grepl("Controls", files)])
     if("update_stamp" %in% colnames(participants)) participants$update_stamp <- NULL
     if(include_demographics){
-      participants <- merge(
-        read_demographics(
-          directory,
-          person = "participants"),
-        participants, by = c("subject_label", "event_sequence", "language_code", "language_label"))
+      demographics <- read_demographics(directory, person = "participants", simplify = simplify)
+      if(simplify){
+        participants <- merge(
+          demographics, participants, by = c("subject_label", "event_sequence")
+        )
+      } else{
+        participants <- merge(
+          demographics, participants,
+          by = c("subject_label", "event_sequence", "language_code", "language_label")
+        )
+      }
+
     }
     class(participants) <- c("tbl_df", "tbl", "data.frame")
   }
 
   if(length(variables) != 0){
-    participants <- participants[, c("subject_label", "event_sequence", unlist(variables))]
+    if(include_demographics){
+      participants <- participants[, c(names(demographics), unlist(variables))]
+    } else{
+      participants <- participants[, c("subject_label", "event_sequence", unlist(variables))]
+    }
   }
 
   if(exists("participants", inherits = FALSE)){
