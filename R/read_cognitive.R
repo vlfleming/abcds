@@ -25,7 +25,7 @@ read_cognitive <- function(directory,
 
   load(system.file("extdata/data_dictionary.RData", package = "abcds"))
 
-  cog_labels <- gsub("–| |:|/", "_", unique(data_dictionary[startsWith(data_dictionary$dd_crf_name, "cog"), "dd_crf_label"]))
+  cog_labels <- gsub("\u2013| |:|/", "_", unique(data_dictionary[startsWith(data_dictionary$dd_crf_name, "cog"), "dd_crf_label"]))
 
   if("participants" %in% person){
     participants <- data.frame()
