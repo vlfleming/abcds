@@ -9,7 +9,8 @@ calculate_kbit2_score(
   kbit2verbkraw,
   kbit2ridraw,
   kbit2vnonvraw,
-  print_kbit = TRUE
+  print_kbit = TRUE,
+  doParallel = TRUE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ calculate_kbit2_score(
 \item{kbit2vnonvraw}{Nonverbal Raw Score}
 
 \item{print_kbit}{Print the KBIT-2 results to the console, Default: TRUE}
+
+\item{doParallel}{Use parallel processing to speed up the calculation of multiple KBIT-2 scores, Default: TRUE}
 }
 \value{
 A list containing the verbal and nonverbal standard scores, intelligent quotients,

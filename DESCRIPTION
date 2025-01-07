@@ -13,9 +13,13 @@ LazyData: true
 RoxygenNote: 7.3.2
 Imports:
     data.table,
+    doParallel,
     dplyr,
+    foreach,
     lifecycle,
     magrittr,
+    parallel,
+    plyr,
     tibble,
     utils
 Roxygen: list(markdown = TRUE)
