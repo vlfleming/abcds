@@ -6,7 +6,11 @@
 #' @param kbit2verbkraw Verbal Knowledge Raw Score
 #' @param kbit2ridraw Riddles Raw Score
 #' @param kbit2vnonvraw Nonverbal Raw Score
-#' @param print_kbit Print the KBIT-2 results to the console, Default: TRUE
+#' @param subject_label A subject ID number is required if calculating multiple KBIT-2 scores, Default: NULL
+#' @param add_premorbid_id `r lifecycle::badge("experimental")` Add a premorbid intellectual disability level using only the KBIT-2 score.
+#'     This argument is currently set as FALSE for the default until the premorbid intellectual disability
+#'     calculation is better understood, Default: FALSE
+#' @param print_kbit Print the KBIT-2 results to the console if calculating a single KBIT-2 score, Default: TRUE
 #' @param doParallel Use parallel processing to speed up the calculation of multiple KBIT-2 scores, Default: TRUE
 #' @return A list containing the verbal and nonverbal standard scores, intelligent quotients,
 #' @details Calculates intelligence quotient and age equivalents from the
@@ -22,13 +26,19 @@
 #' @importFrom foreach `%dopar%` foreach
 #' @importFrom plyr rbind.fill
 
-calculate_kbit2_score <- function(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw, print_kbit = TRUE, doParallel = TRUE){
+calculate_kbit2_score <- function(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw,
+                                  subject_label = NULL, add_premorbid_id = FALSE,
+                                  print_kbit = TRUE, doParallel = TRUE){
 
   files <- list.files(path = system.file("extdata", package = "abcds"), pattern = "kbit2", full.names = TRUE)
 
   for(f in files) load(f)
 
-  main_kbit2_calculator <- function(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw){
+  if(length(kbit2verbkraw) > 1 & is.null(subject_label)) {
+    stop("A subject_label vector is required when calculating multiple KBIT-2 scores.")
+  }
+
+  main_kbit2_calculator <- function(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw, subject_label){
     # Calculate sum of standard scores
     kbit2verbraw <- kbit2verbkraw + kbit2ridraw
 
@@ -91,12 +101,23 @@ calculate_kbit2_score <- function(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit
 
     data <-
       data.frame(
-        age_at_visit,kbit2verbkraw, kbit2ridraw, kbit2vnonvraw,
+        subject_label, age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw,
         kbit2verbraw, kbit2verbstd, kbit2verbstdci, kbit2verbstdpr,
         kbit2nonvbstd, kbit2nonvbstdci, kbit2nonvbstdpr, kbit2iqcompstd,
         kbit2iqcompci, kbit2iqcomppr, kbit2nonvbaey, kbit2nonvbae,
         kbit2verbaey, kbit2verbae
       )
+
+    if(add_premorbid_id){
+      if(data$kbit2iqcompstd > 40){
+        data$prefunclevel <- ifelse(data$kbit2iqcompstd >= 50, 1, 2)
+      } else if (data$kbit2iqcompstd == 40){
+        data$prefunclevel <-
+          ifelse(aenonvb$age_equivalent[1] %in% c("< 4:0", "4:0") &
+                   aeverb$age_equivalent[1] %in% c("< 4:0", "4:0"), 3, 2)
+      }
+    }
+    return(data)
   }
 
   if(doParallel & length(kbit2verbkraw) > 1){
@@ -107,20 +128,27 @@ calculate_kbit2_score <- function(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit
     `%dopar%` = foreach::`%dopar%`
     kbitres <-
       foreach::foreach(i = 1:length(kbit2verbkraw), .packages = "abcds") %dopar% {
-        main_kbit2_calculator(age_at_visit[i], kbit2verbkraw[i], kbit2ridraw[i], kbit2vnonvraw[i])
-    } %>% dplyr::bind_rows()
+        main_kbit2_calculator(age_at_visit[i], kbit2verbkraw[i], kbit2ridraw[i], kbit2vnonvraw[i], subject_label[i])
+    } %>%
+      dplyr::bind_rows() %>%
+      dplyr::arrange(subject_label)
   } else if (!doParallel & length(kbit2verbkraw) > 1){
     kbitres <- data.frame()
     for(i in 1:length(kbit2verbkraw)){
-      data <- main_kbit2_calculator(age_at_visit[i], kbit2verbkraw[i], kbit2ridraw[i], kbit2vnonvraw[i])
+      cat("\r Processing data for ", subject_label[i])
+      data <- main_kbit2_calculator(age_at_visit[i], kbit2verbkraw[i], kbit2ridraw[i], kbit2vnonvraw[i], subject_label[i])
       kbitres <- plyr::rbind.fill(kbitres, data)
     }
+    kbitres <- dplyr::arrange(kbitres, subject_label)
   } else if(length(kbit2verbkraw) == 1){
-    kbitres <- main_kbit2_calculator(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw)
+    kbitres <- main_kbit2_calculator(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw, subject_label)
+    kbitres$subject_label <- NULL
     if(print_kbit) print_kbit2_results(kbitres)
   } else{
     stop("An error occurred. Please check your data and try again.")
   }
+
+  class(kbitres) <- c("tbl_df", "tbl", "data.frame")
 
   return(kbitres)
 

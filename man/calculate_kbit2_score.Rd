@@ -9,6 +9,8 @@ calculate_kbit2_score(
   kbit2verbkraw,
   kbit2ridraw,
   kbit2vnonvraw,
+  subject_label = NULL,
+  add_premorbid_id = FALSE,
   print_kbit = TRUE,
   doParallel = TRUE
 )
@@ -22,7 +24,13 @@ calculate_kbit2_score(
 
 \item{kbit2vnonvraw}{Nonverbal Raw Score}
 
-\item{print_kbit}{Print the KBIT-2 results to the console, Default: TRUE}
+\item{subject_label}{A subject ID number is required if calculating multiple KBIT-2 scores, Default: NULL}
+
+\item{add_premorbid_id}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Add a premorbid intellectual disability level using only the KBIT-2 score.
+This argument is currently set as FALSE for the default until the premorbid intellectual disability
+calculation is better understood, Default: FALSE}
+
+\item{print_kbit}{Print the KBIT-2 results to the console if calculating a single KBIT-2 score, Default: TRUE}
 
 \item{doParallel}{Use parallel processing to speed up the calculation of multiple KBIT-2 scores, Default: TRUE}
 }
