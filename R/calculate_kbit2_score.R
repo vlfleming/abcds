@@ -101,12 +101,14 @@ calculate_kbit2_score <- function(age_at_visit, kbit2verbkraw, kbit2ridraw, kbit
 
     data <-
       data.frame(
-        subject_label, age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw,
+        age_at_visit, kbit2verbkraw, kbit2ridraw, kbit2vnonvraw,
         kbit2verbraw, kbit2verbstd, kbit2verbstdci, kbit2verbstdpr,
         kbit2nonvbstd, kbit2nonvbstdci, kbit2nonvbstdpr, kbit2iqcompstd,
         kbit2iqcompci, kbit2iqcomppr, kbit2nonvbaey, kbit2nonvbae,
         kbit2verbaey, kbit2verbae
       )
+
+    if(!is.null(subject_label)) data <- cbind(subject_label, data)
 
     if(add_premorbid_id){
       if(data$kbit2iqcompstd > 40){
