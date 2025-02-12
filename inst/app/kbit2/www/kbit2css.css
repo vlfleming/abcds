@@ -1,0 +1,32 @@
+h2 {
+    color: #000080;
+}
+
+.headImg img {
+  width: 40%;
+  height: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.headImg {
+  background-color: #EBE8FC;
+}
+
+.col-sm-4 form {
+  background-color: #EBE8FC;
+}
+
+.addcolor {
+  color: #000080;
+  font-weight: bold;
+  background-color: #EBE8FC;
+}
+
+ul {
+  font-size: 1.2em;
+  line-height: 2em;
+}
