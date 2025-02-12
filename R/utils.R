@@ -31,3 +31,19 @@ expand_lookup <- function(data, variable){
   lookupTable[order(lookupTable[[variable]], decreasing = TRUE), ]
 
   }
+
+
+#' @title deploy_kbit2_app
+#' @description Deploys the KBIT-2 Calculator Shiny app on a local host server
+#' @return Launches the KBIT-2 Calculator Shiny app
+#' @details Deploys the KBIT-2 Calculator Shiny app on a local host server
+#' @importFrom shiny runApp
+#' @export
+
+deploy_kbit2_app <- function(){
+  shiny::runApp(system.file("app/kbit2/app.R", package = "abcds"))
+}
+
+
+
+

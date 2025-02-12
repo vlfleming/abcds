@@ -21,7 +21,8 @@ Imports:
     parallel,
     plyr,
     tibble,
-    utils
+    utils,
+    shiny
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/bhelsel/abcds
 BugReports: https://github.com/bhelsel/abcds/issues
